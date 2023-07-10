@@ -2,6 +2,7 @@ package com.lesson7.controller;
 
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -19,7 +20,7 @@ public class HttpMethod_Controller {
     }
 
     @PostMapping("/sukuaka")
-    public ResponseEntity<String> create(@RequestBody CreateForm form){
+    public ResponseEntity<String> create(@RequestBody @Validated CreateForm form){
         URI url = UriComponentsBuilder.fromUriString("http://localhost:8080")
                 .path("/sukuaka/id")
                 .build()
@@ -28,7 +29,7 @@ public class HttpMethod_Controller {
     }
 
     @PatchMapping("/sukuaka/{id}")
-    public ResponseEntity<Map<String,String>> update(@PathVariable("id") int id, @RequestBody UpdateForm form){
+    public ResponseEntity<Map<String,String>> update(@PathVariable("id") int id, @RequestBody @Validated UpdateForm form){
         return ResponseEntity.ok(Map.of("message", "name successfully updated"));
     }
 
@@ -39,3 +40,4 @@ public class HttpMethod_Controller {
     }
 
 }
+
